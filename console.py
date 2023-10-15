@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+"""
+Cmd line processor
+"""
+
 import cmd
 import sys
 from models.base_model import BaseModel
