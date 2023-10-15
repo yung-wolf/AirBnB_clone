@@ -47,6 +47,19 @@ class TestPlace(unittest.TestCase):
         self.assertIsInstance(self.s1.longitude, float)
         self.assertIsInstance(self.s1.amenity_ids, list)
 
+    def test_inheritance(self):
+        """test parent class"""
+        self.assertTrue(issubclass(self.s1.__class__, BaseModel), True)
+
+    def test_save(self):
+        """test save method"""
+        self.s1.save()
+        self.assertNotEqual(self.s1.created_at, self.s1.updated_at)
+
+    def test_to_dict(self):
+        """test to_dict method"""
+        self.assertEqual('to_dict' in dir(self.s1), True)
+
 
 if __name__ == "__main__":
     unittest.main()
