@@ -1,87 +1,72 @@
-#!/usr/bin/python3
-"""
-Test cases for BaseModel class
-"""
-
 import unittest
-import uuid
-from datetime import datetime
 from models.base_model import BaseModel
+from datetime import datetime
 
-class BaseModelTest(unittest.TestCase):
-    """
-    BaseModelTest class test the BaseModel class
-    """
-    
-    def test_init__(self):
-        """
-        Test the `__init__()` method of the `BaseModel` class.
-        """
-        baseModel_instance = BaseModel()
-        
-        # Check if 'id' is a valid UUID version 4    
-        self.assertTrue(uuid.UUID(baseModel_instance.id, version=4))
-        
-        # Check if 'id', 'create_at', and 'updated_at' is not None
-        self.assertIsNotNone(baseModel_instance.id)
-        self.assertIsNotNone(baseModel_instance.created_at)
-        self.assertIsNotNone(baseModel_instance.updated_at)
-        
-    def test_init_with_kwargs(self):
-        """
-        Test the `__init__()` method of the `BaseModel` class with keyword arguments.
-        """
-        base_model = BaseModel(name='Alice', my_number=123)
 
-        self.assertEqual(base_model.name, 'Alice')
-        self.assertEqual(base_model.my_number, 123)
-        
-    def test_init_with_kwargs_datetime(self):
-        """
-        Test the `__init__()` method of the `BaseModel` class with keyword arguments for datetime fields.
-        """
-        created_at = datetime.fromisoformat('2023-10-11T14:43:38.559625')
-        updated_at = datetime.fromisoformat('2023-10-11T14:43:38.559625')
-        
-        baseModel_instance = BaseModel(created_at=created_at, updated_at=updated_at)
-        
-        # Check if 'created_at' and 'updated_at' are datetime objects
-        self.assertIsInstance(baseModel_instance.created_at, datetime)
-        self.assertIsInstance(baseModel_instance.updated_at, datetime)
-    
-    def test_str(self):
-        """
-        Test the `__str__()` method of the `BaseModel` class.
-        """
-        base_model = BaseModel()
+class TestBaseModel(unittest.TestCase):
 
-        expected_output = f'[{base_model.__class__.__name__}] ({base_model.id}) {base_model.__dict__}'
-        self.assertEqual(str(base_model), expected_output)
-    
+    def setUp(self):
+        """Sets up test class"""
+        self.bm1 = BaseModel()
+        self.bm1.name = "My_First_Model"
+        self.bm1.my_number = 89
+        self.first_updated_at = self.bm1.updated_at
+        self.bm2 = BaseModel()
+
+    def test_uuid(self):
+        """Test uuid of BaseModel objs"""
+        self.assertIsInstance(self.bm1, BaseModel)
+        self.assertNotEqual(self.bm1.id, self.bm2.id)
+        self.assertIsInstance(self.bm1.id, str)
+
+    def test_attributes(self):
+        """ test that all attributes are present"""
+        self.assertTrue(hasattr(self.bm1, "created_at"))
+        self.assertTrue(hasattr(self.bm1, "updated_at"))
+        self.assertTrue(hasattr(self.bm1, "name"))
+        self.assertTrue(hasattr(self.bm1, "my_number"))
+        self.assertTrue(hasattr(self.bm1, "id"))
+        self.assertTrue(hasattr(self.bm2, "id"))
+
+    def test_datetime_objs(self):
+        """Test `created_at` and `updated_at` datetime objects"""
+        self.assertIsInstance(self.bm1.created_at, datetime)
+        self.assertIsInstance(self.bm2.created_at, datetime)
+        self.assertIsInstance(self.bm1.updated_at, datetime)
+        self.assertIsInstance(self.bm2.updated_at, datetime)
+        self.assertNotEqual(self.bm1.created_at, self.bm1.updated_at)
+
     def test_save(self):
-        """
-        Test the `save()` method of the `BaseModel` class.
-        """
-        base_model = BaseModel()
+        """Test save method of BM"""
+        self.bm1.save()
+        self.assertNotEqual(self.first_updated_at, self.bm1.updated_at)
 
-        initial_updated_at = base_model.updated_at
-        base_model.save()
-        final_updated_at = base_model.updated_at
-        self.assertGreater(final_updated_at, initial_updated_at)
-    
-    def test_to_dict(self):
-        """
-        Test the `to_dict()` method of the `BaseModel` class.
-        """
-        base_model = BaseModel(name='Alice', my_number=123)
+    def test_to_dic(self):
+        """Test that to_dict method returns dictionary"""
+        bm1_dict = self.bm1.to_dict()
+        self.assertIsInstance(bm1_dict, dict)
+        self.assertIsInstance(bm1_dict['created_at'], str)
+        self.assertIsInstance(bm1_dict['updated_at'], str)
+        # test `class_name` in dict
+        self.assertEqual(bm1_dict['__class__'], 'BaseModel')
 
-        dict_representation = base_model.to_dict()
+    def test_kwargs(self):
+        """ create object from dict. Validate attr of object
+        created from dict.
+        """
+        bm1_dict = self.bm1.to_dict()
+        nb = BaseModel(**bm1_dict)
 
-        self.assertEqual(dict_representation["__class__"], base_model.__class__.__name__)
-        self.assertEqual(dict_representation["created_at"], base_model.created_at.isoformat())
-        self.assertEqual(dict_representation["updated_at"], base_model.updated_at.isoformat())
-        self.assertEqual(dict_representation["name"], 'Alice')
-        self.assertEqual(dict_representation["my_number"], 123)
-    
-if __name__ == "__main__":
-    unittest.main()
+        self.assertEqual(self.bm1.id, nb.id)
+        self.assertEqual(self.bm1.my_number, nb.my_number)
+        self.assertEqual(self.bm1.name, nb.name)
+        self.assertEqual(self.bm1.created_at, nb.created_at)
+        self.assertEqual(self.bm1.updated_at, nb.updated_at)
+        self.assertIsInstance(nb.created_at, datetime)
+        self.assertIsInstance(nb.updated_at, datetime)
+
+        # test that object created != original (bm1)
+        self.assertFalse(self.bm1 is nb)
+
+    def test_str_print(self):
+        """Test the `str` print method"""
