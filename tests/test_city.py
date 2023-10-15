@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+
+"""
+Test case for City class
+"""
+
+
 import unittest
 from models.base_model import BaseModel
 from models.city import City

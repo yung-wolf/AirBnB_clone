@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+
+"""
+Test Place class
+"""
+
+
 import unittest
 from models.base_model import BaseModel
 from models.place import Place

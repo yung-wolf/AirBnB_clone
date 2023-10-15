@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+
+"""
+Test State class
+"""
+
 import unittest
 from models.base_model import BaseModel
 from models.state import State

@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+
+"""
+Test Review class
+"""
+
 import unittest
 from models.base_model import BaseModel
 from models.review import Review
