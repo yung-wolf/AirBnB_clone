@@ -77,3 +77,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_str_print(self):
         """Test the `str` print method"""
+
+
+if __name__ == "__main__":
+    unittest.main()
