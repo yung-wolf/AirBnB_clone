@@ -22,3 +22,7 @@ class TestAmenity(unittest.TestCase):
         self.assertTrue(hasattr(pub, 'name'))
         self.assertEqual(pub.name, 'Pub')
         self.assertIsInstance(pub.name, str)
+
+
+if __name__ == "__main__":
+    unittest.main()

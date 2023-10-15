@@ -23,3 +23,7 @@ class TestCity(unittest.TestCase):
         self.assertTrue(hasattr(newyork_city, 'name'))
         self.assertEqual(newyork_city.name, 'New York City')
         self.assertIsInstance(c1.name, str)
+
+
+if __name__ == "__main__":
+    unittest.main()

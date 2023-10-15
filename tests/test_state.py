@@ -21,3 +21,7 @@ class TestState(unittest.TestCase):
         self.assertTrue(hasattr(newyork, 'name'))
         self.assertEqual(newyork.name, 'NewYork')
         self.assertIsInstance(s1.name, str)
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -21,3 +21,7 @@ class TestReview(unittest.TestCase):
         self.assertIsInstance(s1.place_id, str)
         self.assertIsInstance(s1.user_id, str)
         self.assertIsInstance(s1.text, str)
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -77,6 +77,10 @@ class TestBaseModel(unittest.TestCase):
 
     def test_str_print(self):
         """Test the `str` print method"""
+        str_print = str(self.bm1)
+        self.assertIsInstance(str_print, str)
+        self.assertIn('BaseModel', str_print)
+        self.assertIn(str(self.bm1.id), str_print)
 
 
 if __name__ == "__main__":
