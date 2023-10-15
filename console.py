@@ -72,6 +72,27 @@ class HBNBCommand(cmd.Cmd):
         else:
             print('** class name missing **')
 
+    def do_all(self, arg=""):
+        """Prints all string representation of all instances. 
+        class name is optional. 
+
+        Ex: $ all BaseModel or $ all
+        """
+        if arg == "" or arg == "BaseModel":
+            objs = storage.all()
+            lst = []  # an empty list
+            for k, v in objs.items():
+                lst.append(f"{v}")
+            print(lst)
+        else:
+            print("** class doesn't exist **")
+
+    def do_update(self, args):
+        """Updates an instance based on the class name and id
+        by adding or updating attribute (save the change into the JSON file)
+        Ex: $ update BaseModel 1234-1234-1234 email 'aibnb@mail.com'
+        """
+
     def emptyline(self):
         """Called when an empty line is entered"""
 
