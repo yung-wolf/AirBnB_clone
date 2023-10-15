@@ -73,8 +73,8 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
 
     def do_all(self, arg=""):
-        """Prints all string representation of all instances. 
-        class name is optional. 
+        """Prints all string representation of all instances.
+        class name is optional.
 
         Ex: $ all BaseModel or $ all
         """
