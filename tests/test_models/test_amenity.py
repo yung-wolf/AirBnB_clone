@@ -11,6 +11,7 @@ from models.amenity import Amenity
 
 
 class TestAmenity(unittest.TestCase):
+    """Test Amenity class"""
 
     def setUp(self):
         """set up test class"""
