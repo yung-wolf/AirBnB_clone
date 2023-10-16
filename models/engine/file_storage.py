@@ -44,6 +44,7 @@ class FileStorage:
         from models.amenity import Amenity
         from models.place import Place
         from models.review import Review
+        from models.user import User
 
         classes = {
             'BaseModel': BaseModel,
@@ -51,7 +52,8 @@ class FileStorage:
             'City': City,
             'Amenity': Amenity,
             'Place': Place,
-            'Review': Review
+            'Review': Review,
+            'User': User
         }
         if class_name in classes:
             return classes.get(class_name)

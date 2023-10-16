@@ -26,10 +26,11 @@ class BaseModel:
         else:
             for key, value in kwargs.items():
                 if key != '__class__':
-                    if key == 'name' or key == 'my_number' or key == 'id':
-                        self.key = value
-                    else:  # format created_at/updated_at to datetime objs
+                    if key == 'created_at' or key == 'updated_at':
+                        # format created_at/updated_at to datetime objs
                         self.key = datetime.fromisoformat(value)
+                    else:
+                        self.key = value
                     self.__dict__[key] = self.key
             if 'key' in self.__dict__:  # removes the key `key` from dict
                 del self.__dict__['key']
