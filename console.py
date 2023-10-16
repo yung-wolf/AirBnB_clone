@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Cmd line processor
+Cmd line processor interpreter
 """
 
 import cmd
@@ -21,7 +21,8 @@ class HBNBCommand(cmd.Cmd):
         """
         if arg:
             try:
-                new_obj = BaseModel()
+                cls = storage.get_class(arg)
+                new_obj = cls()
                 new_obj.save()
                 print(new_obj.id)
             except NameError:
@@ -36,6 +37,7 @@ class HBNBCommand(cmd.Cmd):
         if arg:
             try:
                 args = arg.split()
+                cls = storage.get_class(args[0])
                 cls_name = args[0]
                 if len(args) < 2:
                     print('** instance id missing **')
@@ -60,15 +62,17 @@ class HBNBCommand(cmd.Cmd):
         if arg:
             try:
                 args = arg.split()
+                cls_name = storage.get_class(args[0])
                 cls_name = args[0]
                 if len(args) < 2:
                     print('** instance id missing **')
                 else:
                     obj_id = args[1]
                     objs = storage.all()
-                    key = f"{cls_name}.{obj_id}"
+                    key = f"{str(cls_name)}.{obj_id}"
                     if key in objs:
                         del objs[key]
+                        storage.save()
                     else:
                         print('** no instance found **')
             except NameError:
@@ -116,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
                         print('** no instance found **')
                 else:
                     obj_id = args[1]
-                    nm = args[2]
+                    nm = args[2]  # attribute name
                     objs = storage.all()
                     # check class name is valid
                     key = f"{cls_name}.{obj_id}"

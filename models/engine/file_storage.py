@@ -53,7 +53,10 @@ class FileStorage:
             'Place': Place,
             'Review': Review
         }
-        return classes.get(class_name)
+        if class_name in classes:
+            return classes.get(class_name)
+        else:
+            raise NameError
 
     def reload(self):
         """deserializes the JSON file to __objects
