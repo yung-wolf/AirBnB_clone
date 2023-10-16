@@ -116,13 +116,13 @@ class HBNBCommand(cmd.Cmd):
                         print('** no instance found **')
                 else:
                     obj_id = args[1]
-                    obj_attr_name = args[2]
+                    nm = args[2]
                     objs = storage.all()
                     # check class name is valid
                     key = f"{cls_name}.{obj_id}"
                     if key in objs:
-                        if obj_attr_name in objs[key].__dict__:
-                            objs[key].__dict__[obj_attr_name] = args[3]
+                        if nm in objs[key].__dict__:
+                            objs[key].__dict__[nm] = args[3].replace('"', '')
                             storage.save()
                         else:
                             print("** value missing **")
