@@ -39,6 +39,16 @@ class TestFileStorage(unittest.TestCase):
         key = f"{bm.__class__.__name__}.{bm.id}"
         self.assertIsNotNone(self.objs_dict[key])
 
+    def test_save(self):
+        """Test save method"""
+        e_storage = FileStorage()
+        e_dict = e_storage.all()
+        bm = BaseModel()
+        bm_name = "Dummy Model-2"
+        e_storage.new(bm)
+        e_storage.save()
+        self.assertEqual(self.objs_dict, e_dict)
+
 
 if __name__ == "__main__":
     unittest.main()
