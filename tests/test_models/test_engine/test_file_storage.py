@@ -49,6 +49,17 @@ class TestFileStorage(unittest.TestCase):
         e_storage.save()
         self.assertEqual(self.objs_dict, e_dict)
 
+    def test_reload(self):
+        """test reload method"""
+        try:
+            os.remove("objects_saveFile.json")
+        except:
+            pass
+        with open("objects_saveFile.json", "w") as file:
+            file.write("hello")
+        with open("objects_saveFile.json", "r") as file:            for text in file:
+                self.assertEqual(text, "hello")
+
 
 if __name__ == "__main__":
     unittest.main()
