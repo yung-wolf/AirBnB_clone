@@ -21,8 +21,8 @@ class BaseModel:
 
         if not kwargs:
             storage.new(self)
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.created_at = datetime.utcnow()
+            self.updated_at = datetime.utcnow()
         else:
             for key, value in kwargs.items():
                 if key != '__class__':
@@ -36,7 +36,7 @@ class BaseModel:
 
     def save(self):
         """Updates `updated_at` every time you change your object."""
-        self.updated_at = datetime.now()
+        self.updated_at = datetime.utcnow()
         storage.save()
 
     def to_dict(self):
