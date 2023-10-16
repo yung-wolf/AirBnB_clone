@@ -29,6 +29,7 @@ class TestFileStorage(unittest.TestCase):
         """Test all method"""
         self.assertIsNotNone(self.objs_dict)
         self.assertEqual(type(self.objs_dict), dict)
+        self.assertIs(self.objs_dict, self.fs._FileStorage__objects)
 
 
 if __name__ == "__main__":
