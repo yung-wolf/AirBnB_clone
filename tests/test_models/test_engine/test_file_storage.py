@@ -31,6 +31,14 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(type(self.objs_dict), dict)
         self.assertIs(self.objs_dict, self.fs._FileStorage__objects)
 
+    def test_new(self):
+        """Test new method"""
+        bm = BaseModel()
+        bm_name = "Dummy Model"
+        self.fs.new(bm)
+        key = f"{bm.__class__.__name__}.{bm.id}"
+        self.assertIsNotNone(self.objs_dict[key])
+
 
 if __name__ == "__main__":
     unittest.main()
