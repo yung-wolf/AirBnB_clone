@@ -6,7 +6,6 @@ module: models/user
 holds User class.
 """
 
-import json
 from models.base_model import BaseModel
 
 
