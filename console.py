@@ -86,14 +86,24 @@ class HBNBCommand(cmd.Cmd):
 
         Ex: $ all BaseModel or $ all
         """
-        if arg == "" or arg == "BaseModel":
-            objs = storage.all()
-            lst = []  # an empty list
+        lst = []  # an empty list
+        objs = storage.all()
+        if arg:  # print only arg inst (User/BaseModel)
+            try:
+                # check if arg is valid class name
+                cls_name = storage.get_class(arg)
+                if cls_name:
+                    for k, v in objs.items():
+                        cls, obj_id = k.split('.')
+                        if cls == arg:
+                            lst.append(f"{v}")
+                    print(lst)
+            except NameError:
+                print("** class doesn't exist **")
+        else:
             for k, v in objs.items():
                 lst.append(f"{v}")
             print(lst)
-        else:
-            print("** class doesn't exist **")
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id
