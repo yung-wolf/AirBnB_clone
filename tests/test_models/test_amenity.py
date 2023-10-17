@@ -30,6 +30,10 @@ class TestAmenity(unittest.TestCase):
         self.assertTrue('name' in self.pub.__dict__)
         self.assertTrue('id' in self.a1.__dict__)
 
+    def test_instance_attr(self):
+        """Test type of attributes"""
+        self.assertIsInstance(self.a1.name, str)
+
     def test_inheritance(self):
         """test parent class"""
         self.assertTrue(issubclass(self.a1.__class__, BaseModel), True)
