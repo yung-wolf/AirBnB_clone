@@ -42,6 +42,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_save(self):
         """Test save method"""
+        self.fs.save()
         e_storage = FileStorage()
         e_dict = e_storage.all()
         bm = BaseModel()
@@ -52,6 +53,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_reload(self):
         """test reload method"""
+        self.fs.reload()
         self.assertIsNone(self.fs.reload())
 
 
