@@ -30,6 +30,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertIsNotNone(self.objs_dict)
         self.assertEqual(type(self.objs_dict), dict)
         self.assertIs(self.objs_dict, self.fs._FileStorage__objects)
+        self.assertIsNotNone(self.fs._FileStorage__file_path)
 
     def test_new(self):
         """Test new method"""
@@ -51,15 +52,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_reload(self):
         """test reload method"""
-        try:
-            os.remove("objects_saveFile.json")
-        except:
-            pass
-        with open("objects_saveFile.json", "w") as file:
-            file.write("hello")
-        with open("objects_saveFile.json", "r") as file:
-            for text in file:
-                self.assertEqual(text, "hello")
+        self.assertIsNone(self.fs.reload())
 
 
 if __name__ == "__main__":

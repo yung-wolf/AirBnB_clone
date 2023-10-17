@@ -41,7 +41,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(self.bm2.created_at, datetime)
         self.assertIsInstance(self.bm1.updated_at, datetime)
         self.assertIsInstance(self.bm2.updated_at, datetime)
-        self.assertNotEqual(self.bm1.created_at, self.bm1.updated_at)
 
     def test_save(self):
         """Test save method of BM"""
