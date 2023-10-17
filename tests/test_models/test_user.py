@@ -21,14 +21,13 @@ class TestUser(unittest.TestCase):
 
     def test_attributes(self):
         """Test attributes of User class"""
-        self.assertTrue(hasattr(self.user1, 'first_name'))
-        self.assertTrue(hasattr(self.user1, 'last_name'))
-        self.assertTrue(hasattr(self.user1, 'email'))
-        self.assertTrue(hasattr(self.user1, 'password'))
+        self.assertTrue('first_name' in self.user1.__dict__)
+        self.assertTrue('last_name' in self.user1.__dict__)
+        self.assertTrue('email' in self.user1.__dict__)
+        self.assertTrue('password' in self.user1.__dict__)
         self.assertTrue('created_at' in self.user1.__dict__)
         self.assertTrue('updated_at' in self.user1.__dict__)
         self.assertTrue('id' in self.user1.__dict__)
-
         self.assertEqual(self.user1.first_name, 'Eli')
         self.assertEqual(self.user1.last_name, 'Yung')
         self.assertEqual(self.user1.email, 'eliYung@alx.com')
