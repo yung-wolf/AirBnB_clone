@@ -57,7 +57,8 @@ class TestFileStorage(unittest.TestCase):
             pass
         with open("objects_saveFile.json", "w") as file:
             file.write("hello")
-        with open("objects_saveFile.json", "r") as file:            for text in file:
+        with open("objects_saveFile.json", "r") as file:
+            for text in file:
                 self.assertEqual(text, "hello")
 
 
