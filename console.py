@@ -114,7 +114,8 @@ class HBNBCommand(cmd.Cmd):
             try:
                 args = arg.split()
                 cls_name = args[0]
-                cls = storage.get_class(cls_name)
+                cls = storage.get_class(f"{cls_name}")
+                objs = storage.all()
                 if len(args) < 2:
                     if not cls:
                         print("** class doesn't exist **")
@@ -122,26 +123,20 @@ class HBNBCommand(cmd.Cmd):
                         print('** instance id missing **')
                 elif len(args) < 3:
                     obj_id = args[1]
-                    objs = storage.all()
                     key = f"{cls_name}.{obj_id}"
                     if key in objs:
                         print('** attribute name missing **')
                     else:
                         print('** no instance found **')
+                elif len(args) == 3:
+                    print("** value missing **")
                 else:
                     obj_id = args[1]
-                    nm = args[2]  # attribute name
-                    objs = storage.all()
-                    # check class name is valid
+                    name = args[2]  # attribute name
                     key = f"{cls_name}.{obj_id}"
-                    if key in objs:
-                        if nm in objs[key].__dict__:
-                            objs[key].__dict__[nm] = args[3].replace('"', '')
-                            storage.save()
-                        else:
-                            print("** value missing **")
-                    else:
-                        print('** no instance found **')
+                    cast = type(eval(args[3]))
+                    setattr(objs[key], name, cast(args[3].replace('"', '')))
+                    objs[key].save()
             except NameError:
                 print("** class doesn't exist **")
         else:
