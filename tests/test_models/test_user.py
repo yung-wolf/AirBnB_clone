@@ -47,6 +47,7 @@ class TestUser(unittest.TestCase):
 
     def test_save(self):
         """test save method"""
+        self.user1.save()
         self.assertNotEqual(self.user1.created_at, self.user1.updated_at)
 
     def test_to_dict(self):
