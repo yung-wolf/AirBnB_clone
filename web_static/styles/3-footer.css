@@ -1,0 +1,19 @@
+/*
+  =================
+  Footer
+  =================
+*/
+
+footer {
+	background: white;
+	height: 60px;
+	width: 100%;
+	border-top: #CCCCCC;
+	position: absolute;
+	bottom: 0;
+}
+
+footer p {
+	text-align: center;
+	padding-top: 0.5px;
+}
