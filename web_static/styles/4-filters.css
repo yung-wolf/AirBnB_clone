@@ -6,7 +6,7 @@
 	border-radius: 4px;
 }
 
-.filters button {
+section button {
 	font-size: 18px;
 	background: #FF5A5F;
 	color: #FFFFFF;
@@ -16,7 +16,7 @@
 	border-radius: 4px;
 	margin: 1.1% 0;
 	margin-right: 30px;
-	float: right
+	float: right;
 }
 
 .filters button:hover {
